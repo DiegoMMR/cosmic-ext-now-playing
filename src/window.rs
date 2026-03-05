@@ -4,6 +4,7 @@ use std::time::Duration;
 
 use cosmic::app::Core;
 use cosmic::iced::{
+    ContentFit,
     platform_specific::shell::commands::popup::{destroy_popup, get_popup},
     stream::channel,
     window::Id,
@@ -349,7 +350,7 @@ impl cosmic::Application for Window {
             .push(icon::from_name(transport_icon).size(size.0))
             .push(
                 text(self.now_playing_text.as_str())
-                    .size(size.0)
+                    .size(size.0.saturating_sub(1))
                     .width(Length::Fixed(260.0))
                     .wrapping(Wrapping::None)
                     .ellipsize(Ellipsize::End(EllipsizeHeightLimit::Lines(1))),
@@ -376,12 +377,26 @@ impl cosmic::Application for Window {
                 "media-playback-start-symbolic"
             }
         };
+        let album_height = size.0.saturating_mul(4);
+        let album_width = album_height.saturating_mul(16) / 9;
 
         let album_widget = self
             .album_art_path
             .as_ref()
-            .map(|path| icon::icon(icon::from_path(path.clone())).size(size.0.saturating_mul(4)))
-            .unwrap_or_else(|| icon::from_name("audio-x-generic-symbolic").size(size.0.saturating_mul(4)).icon());
+            .map(|path| {
+                icon::icon(icon::from_path(path.clone()))
+                    .height(Length::Fixed(f32::from(album_height)))
+                    .width(Length::Fixed(f32::from(album_width)))
+                    .content_fit(ContentFit::Contain)
+            })
+            .unwrap_or_else(|| {
+                icon::from_name("audio-x-generic-symbolic")
+                    .size(album_height)
+                    .icon()
+                    .height(Length::Fixed(f32::from(album_height)))
+                    .width(Length::Fixed(f32::from(album_width)))
+                    .content_fit(ContentFit::Contain)
+            });
 
         let controls = Row::new()
             .spacing(pad.0)
