@@ -17,7 +17,7 @@ use cosmic::iced_runtime::core::window;
 use cosmic::{Action, Element, Task};
 
 // Widgets we're going to use
-use cosmic::widget::{button, column, icon, list_column, text, Row};
+use cosmic::widget::{button, column, icon, text, Row};
 
 // Every COSMIC Application and Applet MUST have an ID
 const ID: &str = "com.example.BasicApplet";
@@ -401,25 +401,29 @@ impl cosmic::Application for Window {
 
         let media_info = column()
             .spacing(2)
+            .align_x(cosmic::iced::Alignment::Center)
             .push(
                 text(self.now_playing_title.as_str())
                     .size(size.0.saturating_sub(1))
                     .width(Length::Fill)
+                    .align_x(cosmic::iced::alignment::Horizontal::Center)
                     .wrapping(Wrapping::WordOrGlyph),
             )
             .push(
                 text(self.now_playing_artist.as_str())
                     .size(size.0.saturating_sub(3))
                     .width(Length::Fill)
+                    .align_x(cosmic::iced::alignment::Horizontal::Center)
                     .wrapping(Wrapping::WordOrGlyph),
             );
 
-        let content_list = list_column()
+        let content_list = column()
             .padding(12)
             .spacing(12)
-            .add(album_widget)
-            .add(media_info)
-            .add(controls);
+            .align_x(cosmic::iced::Alignment::Center)
+            .push(album_widget)
+            .push(media_info)
+            .push(controls);
 
         // Set the widget content list as the popup_container for the applet
         self.core.applet.popup_container(content_list).into()
