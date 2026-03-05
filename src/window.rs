@@ -133,7 +133,7 @@ impl cosmic::Application for Window {
      *  secondary view function (view_window) that shows the widgets in the popup when it's
      *  opened.
      */
-    fn view(&self) -> Element<Message> {
+    fn view(&self) -> Element<'_, Message> {
         let size = self.core.applet.suggested_size(true);
         let pad = self.core.applet.suggested_padding(true);
 
@@ -163,7 +163,7 @@ impl cosmic::Application for Window {
     }
 
     // The actual GUI window for the applet. It's a popup.
-    fn view_window(&self, _id: Id) -> Element<Message> {
+    fn view_window(&self, _id: Id) -> Element<'_, Message> {
         // A text box to show if we've enabled or disabled anything in the model
         let content_list = list_column()
             .padding(5)
