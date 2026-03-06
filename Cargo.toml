@@ -2,6 +2,9 @@
 name = "cosmic-now-playing"
 version = "0.1.0"
 edition = "2024"
+license = "GPL-3.0-only"
+description = "A COSMIC panel applet that shows and controls currently playing media."
+repository = "https://github.com/DiegoMMR/cosmic-now-playing"
 
 [dependencies]
 mpris = "2.0"
