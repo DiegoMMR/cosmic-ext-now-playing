@@ -867,6 +867,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "cosmic-ext-now-playing"
+version = "0.1.0"
+dependencies = [
+ "image",
+ "libcosmic",
+ "mpris",
+]
+
+[[package]]
 name = "cosmic-freedesktop-icons"
 version = "0.4.0"
 source = "git+https://github.com/pop-os/freedesktop-icons#7a61a704f6d1ec41f71cbe766e3cc484858523fa"
@@ -878,15 +887,6 @@ dependencies = [
  "thiserror 2.0.18",
  "tracing",
  "xdg",
-]
-
-[[package]]
-name = "cosmic-now-playing"
-version = "0.1.0"
-dependencies = [
- "image",
- "libcosmic",
- "mpris",
 ]
 
 [[package]]
