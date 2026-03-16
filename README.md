@@ -1,5 +1,7 @@
 # cosmic-ext-applet-now-playing
 
+moved to [cosmic utils](https://github.com/cosmic-utils/cosmic-ext-applet-now-playing)
+
 A small COSMIC panel applet that shows what is currently playing via MPRIS.
 
 It displays:
